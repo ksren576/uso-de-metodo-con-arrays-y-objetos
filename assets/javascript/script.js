@@ -154,5 +154,5 @@ divDental.innerHTML = `
        Última atención: ${dental[dental.length - 1].PACIENTE} - ${dental[dental.length - 1].PREVISION}
     </p>`;
 
-//console.log(dental[dental.length - 1])
-//console.log(dental)
+
+
