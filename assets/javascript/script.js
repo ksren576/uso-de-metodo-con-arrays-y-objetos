@@ -86,7 +86,8 @@ let traumatologia = [
     PACIENTE: "MACIAL SUAZO",
     RUT: "11254785-5",
     PREVISION: "ISAPRE",
-  },
+  }
+  
 ];
 let dental = [
   {
@@ -105,7 +106,7 @@ let dental = [
   },
   {
     HORA: "11:30",
-    ESPECILISTA: "SCARLETT WITTING",
+    ESPECIALISTA: "SCARLETT WITTING",
     PACIENTE: "MARIO KAST",
     RUT: "7998789-5",
     PREVISION: "FONASA",
@@ -133,6 +134,53 @@ let dental = [
   },
 ];
 
+// Agregar horas a traumatología
+traumatologia.push({
+  HORA:"09:00",
+  ESPECIALISTA:"RENE POBLETE",
+  PACIENTE:"ANA GALLONA",
+  RUT:"13123329-7",
+  PREVISION:"ISAPRE",
+});
+
+traumatologia.push({
+  HORA:"09:30",
+  ESPECIALISTA:"MARIA SOLAR",
+  PACIENTE:"RAMIRO ANDRADE",
+  RUT:"12221451-K",
+  PREVISION:"FONASA",
+});
+
+traumatologia.push({
+  HORA:"10:00",
+  ESPECIALISTA:"RAUL LOYOLA",
+  PACIENTE:"CARMEN ISLA ",
+  RUT:"10112348-3",
+  PREVISION:"ISAPRE",
+});
+
+traumatologia.push({
+  HORA:"10:30",
+  ESPECIALISTA:"ANTONIO LARENAS",
+  PACIENTE:"PABLO LOAYZA",
+  RUT:"13453234-1",
+  PREVISION:"ISAPRE",
+});
+
+traumatologia.push({
+  HORA:"12:00",
+  ESPECIALISTA:"MATIAS ARAVENA",
+  PACIENTE:"SUSANA POBLETE",
+  RUT:"14345656-6",
+  PREVISION:"FONASA",
+});
+
+// Eliminar primer elemento de radiología
+radiologia.shift();
+
+// Eliminar ultimo elemento de radiologia
+radiologia.pop();
+
 let divRadiologia = document.getElementById('radiologia');
 divRadiologia.innerHTML = `
     <p>Cantidad de atenciones para Radiología: ${radiologia.length}</p>
@@ -146,13 +194,49 @@ divTraumatologia.innerHTML = `
     <p>Primera atención: ${traumatologia[0].PACIENTE} - ${traumatologia[0].PREVISION} |
        Última atención: ${traumatologia[traumatologia.length - 1].PACIENTE} - ${traumatologia[traumatologia.length - 1].PREVISION}
     </p>`;
-
+    
+// Lista de pacientes de dental
 let divDental = document.getElementById('dentales');
 divDental.innerHTML = `
     <p>Cantidad de atenciones dentales: ${dental.length}</p>
     <p>Primera atención: ${dental[0].PACIENTE} - ${dental[0].PREVISION} |
-       Última atención: ${dental[dental.length - 1].PACIENTE} - ${dental[dental.length - 1].PREVISION}
-    </p>`;
+       Última atención: ${dental[dental.length - 1].PACIENTE} - ${dental[dental.length - 1].PREVISION}</p>`;
 
+let divListaDentales = document.getElementById('lista_dentales');
+let lista = '<h3>Lista de consultas médicas de Dental</h3><p>Hora - Especialista - Paciente - Rut - Prevision</p>';
 
+dental.forEach(function(elemento) {
+  lista += `<p>${elemento.HORA} - ${elemento.ESPECIALISTA} - ${elemento.PACIENTE} - ${elemento.RUT} - ${elemento.PREVISION}</p>`;
+});
 
+divListaDentales.innerHTML = lista;
+
+// Listado de pacientes del centro medico
+let divListaPacientes = document.getElementById('lista_pacientes');
+let listadoPacientes = '';
+
+traumatologia.forEach(function(elemento) {
+  listadoPacientes += `<p>${elemento.PACIENTE}</p>`;
+});
+
+radiologia.forEach(function(elemento) {
+  listadoPacientes += `<p>${elemento.PACIENTE}</p>`;
+});
+
+dental.forEach(function(elemento) {
+  listadoPacientes += `<p>${elemento.PACIENTE}</p>`;
+});
+
+divListaPacientes.innerHTML = listadoPacientes;
+
+// Modificar previsiones para dental
+let divListaPrevision = document.getElementById('lista_prevision_dental');
+let listaPrevision = '';
+
+dental.forEach(function(elemento) {
+  if (elemento.PREVISION === 'FONASA') elemento.PREVISION = 'ISAPRE';
+  else elemento.PREVISION = 'FONASA';
+  listaPrevision += `<p>${elemento.PREVISION};${elemento.PACIENTE};${elemento.RUT}</p>`;
+});
+
+divListaPrevision.innerHTML = listaPrevision;
